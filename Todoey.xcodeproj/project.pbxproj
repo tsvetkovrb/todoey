@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		387B142F2463498E0014683B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 387B142E2463498E0014683B /* README.md */; };
 		38F6362F246338AA00AA3280 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F6362E246338AA00AA3280 /* AppDelegate.swift */; };
 		38F63631246338AA00AA3280 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F63630246338AA00AA3280 /* SceneDelegate.swift */; };
-		38F63633246338AA00AA3280 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F63632246338AA00AA3280 /* ViewController.swift */; };
+		38F63633246338AA00AA3280 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F63632246338AA00AA3280 /* ToDoListViewController.swift */; };
 		38F63636246338AA00AA3280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38F63634246338AA00AA3280 /* Main.storyboard */; };
 		38F63638246338AC00AA3280 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38F63637246338AC00AA3280 /* Assets.xcassets */; };
 		38F6363B246338AC00AA3280 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38F63639246338AC00AA3280 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		387B142E2463498E0014683B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		38F6362B246338AA00AA3280 /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38F6362E246338AA00AA3280 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38F63630246338AA00AA3280 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		38F63632246338AA00AA3280 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		38F63632246338AA00AA3280 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
 		38F63635246338AA00AA3280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38F63637246338AC00AA3280 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38F6363A246338AC00AA3280 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,9 +58,10 @@
 		38F6362D246338AA00AA3280 /* Todoey */ = {
 			isa = PBXGroup;
 			children = (
+				387B142E2463498E0014683B /* README.md */,
 				38F6362E246338AA00AA3280 /* AppDelegate.swift */,
 				38F63630246338AA00AA3280 /* SceneDelegate.swift */,
-				38F63632246338AA00AA3280 /* ViewController.swift */,
+				38F63632246338AA00AA3280 /* ToDoListViewController.swift */,
 				38F63634246338AA00AA3280 /* Main.storyboard */,
 				38F63637246338AC00AA3280 /* Assets.xcassets */,
 				38F63639246338AC00AA3280 /* LaunchScreen.storyboard */,
@@ -127,6 +130,7 @@
 			files = (
 				38F6363B246338AC00AA3280 /* LaunchScreen.storyboard in Resources */,
 				38F63638246338AC00AA3280 /* Assets.xcassets in Resources */,
+				387B142F2463498E0014683B /* README.md in Resources */,
 				38F63636246338AA00AA3280 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,7 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38F63633246338AA00AA3280 /* ViewController.swift in Sources */,
+				38F63633246338AA00AA3280 /* ToDoListViewController.swift in Sources */,
 				38F6362F246338AA00AA3280 /* AppDelegate.swift in Sources */,
 				38F63631246338AA00AA3280 /* SceneDelegate.swift in Sources */,
 			);
