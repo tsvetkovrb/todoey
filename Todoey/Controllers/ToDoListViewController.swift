@@ -7,34 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoListViewController: UITableViewController {
-    var itemArray = [TodoItem]()
-    
-    let defaults = UserDefaults.standard
+    var itemArray = [ToDoItem]()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let value = defaults.array(forKey: "ToDoListArray") as? [TodoItem] else { return }
-        itemArray = value
-        
-        let newItem1 = TodoItem()
-        newItem1.title = "New item 1"
-        itemArray.append(newItem1)
-        
-        let newItem2 = TodoItem()
-        newItem2.title = "New item 2"
-        itemArray.append(newItem2)
-        
-        let newItem3 = TodoItem()
-        newItem3.title = "New item 3"
-        itemArray.append(newItem3)
-        
-        let newItem4 = TodoItem()
-        newItem4.title = "New item 4"
-        newItem4.done = true
-        itemArray.append(newItem4)
-        
+//        loadStoredItems()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,7 +35,7 @@ class ToDoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-
+        saveData()
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -67,16 +49,19 @@ class ToDoListViewController: UITableViewController {
             alertTextField.placeholder = "Enter the name..."
             textField = alertTextField
         }
-
+        
         let submit = UIAlertAction(title: "Add", style: .default) { (alertAction) in
             guard let newItemTitle = textField.text else { return }
-            let newToDoItem = TodoItem()
+            
+            let newToDoItem = ToDoItem(context: self.context)
             newToDoItem.title = newItemTitle
+            newToDoItem.done = false
             self.itemArray.append(newToDoItem)
-            self.defaults.set(self.itemArray, forKey: "ToDoListArray")
+            self.saveData()
+            
             self.tableView.reloadData()
         }
-
+        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             self.dismiss(animated: true, completion: nil)
         }
@@ -86,5 +71,25 @@ class ToDoListViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: - Model manipulation methods
+    
+    func saveData() {
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+    }
+    
+//    func loadStoredItems() {
+//        do {
+//            guard let data = try? Data(contentsOf: dataFilePath!) else { return }
+//            let decoder = PropertyListDecoder()
+//            itemArray = try decoder.decode([TodoItem].self, from: data)
+//        } catch {
+//            print(error)
+//        }
+//    }
 }
 
