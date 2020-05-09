@@ -10,12 +10,21 @@ import UIKit
 import CoreData
 
 class ToDoListViewController: UITableViewController {
+    @IBOutlet weak var searchBar: UISearchBar!
+
     var itemArray = [ToDoItem]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadStoredItems()
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnBackground))
+        view.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func tapOnBackground() {
+        searchBar.endEditing(true)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,10 +42,13 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        //        to delete items order is matter
+        //        context.delete(itemArray[indexPath.row])
+        //        itemArray.remove(at: indexPath.row)
         saveData()
         tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Add new items
@@ -81,13 +93,35 @@ class ToDoListViewController: UITableViewController {
         }
     }
     
-    func loadStoredItems() {
-        let request: NSFetchRequest<ToDoItem> = ToDoItem.fetchRequest()
+    func loadStoredItems(with request: NSFetchRequest<ToDoItem> = ToDoItem.fetchRequest()) {
         do {
             itemArray = try context.fetch(request)
+            tableView.reloadData()
         } catch {
             print("loadStoredItems -> error", error)
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension ToDoListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.contains(" ") { return }
+        
+        if searchText.count == 0 {
+            loadStoredItems()
+            return
+        }
+        
+        let request: NSFetchRequest<ToDoItem> = ToDoItem.fetchRequest()
+        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        loadStoredItems(with: request)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
     }
 }
 
