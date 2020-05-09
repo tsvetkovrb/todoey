@@ -11,12 +11,11 @@ import CoreData
 
 class ToDoListViewController: UITableViewController {
     var itemArray = [ToDoItem]()
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loadStoredItems()
+        loadStoredItems()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,14 +81,13 @@ class ToDoListViewController: UITableViewController {
         }
     }
     
-//    func loadStoredItems() {
-//        do {
-//            guard let data = try? Data(contentsOf: dataFilePath!) else { return }
-//            let decoder = PropertyListDecoder()
-//            itemArray = try decoder.decode([TodoItem].self, from: data)
-//        } catch {
-//            print(error)
-//        }
-//    }
+    func loadStoredItems() {
+        let request: NSFetchRequest<ToDoItem> = ToDoItem.fetchRequest()
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("loadStoredItems -> error", error)
+        }
+    }
 }
 
