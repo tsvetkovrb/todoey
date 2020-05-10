@@ -33,8 +33,19 @@ class CategoryViewController: UITableViewController {
         return categoryItems.count
     }
     
+    // MARK: - Table View Delegate Methods
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToItems", sender: self)
+        
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let toDoListVC = segue.destination as! ToDoListViewController
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+
+        toDoListVC.selectedCategory = categoryItems[indexPath.row]
     }
     
     // MARK: - Add new category
