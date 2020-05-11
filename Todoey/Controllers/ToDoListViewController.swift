@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ToDoListViewController: UITableViewController {
+class ToDoListViewController: SwipeViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     let realm = try! Realm()
@@ -38,7 +38,7 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         if let item = toDoItemsArray?[indexPath.row] {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
@@ -104,6 +104,18 @@ class ToDoListViewController: UITableViewController {
     func loadStoredItems() {
         toDoItemsArray = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         tableView.reloadData()
+    }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        guard let toDoItem = toDoItemsArray?[indexPath.row] else { return }
+        
+        do {
+            try realm.write {
+                realm.delete(toDoItem)
+            }
+        } catch {
+            print("ToDoListViewController", error)
+        }
     }
 }
 

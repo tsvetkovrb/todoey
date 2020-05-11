@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeViewController {
     var categoryItems: Results<CategoryItem>?
     let realm = try! Realm()
     
@@ -22,8 +22,8 @@ class CategoryViewController: UITableViewController {
     // MARK: - Table View Data Source Methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         let categoryItem = categoryItems?[indexPath.row]
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         cell.textLabel?.text = categoryItem?.name ?? "No categories added yet"
         
         return cell
@@ -44,7 +44,7 @@ class CategoryViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let toDoListVC = segue.destination as! ToDoListViewController
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-
+        
         toDoListVC.selectedCategory = categoryItems?[indexPath.row]
     }
     
@@ -79,7 +79,7 @@ class CategoryViewController: UITableViewController {
             try realm.write {
                 realm.add(category)
             }
-
+            
             tableView.reloadData()
         } catch {
             print("Save data error", error)
@@ -91,4 +91,17 @@ class CategoryViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // MARK: - Delete Data From Swipe
+    
+    override func updateModel(at indexPath: IndexPath) {
+        guard let item = self.categoryItems?[indexPath.row] else { return }
+        
+        do {
+            try self.realm.write {
+                self.realm.delete(item)
+            }
+        } catch {
+            print("SwipeTableViewCellDelegate error", error)
+        }
+    }
 }

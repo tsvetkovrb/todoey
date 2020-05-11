@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38554F7E2469B75300E1565D /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38554F7D2469B75300E1565D /* SwipeViewController.swift */; };
 		387B142F2463498E0014683B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 387B142E2463498E0014683B /* README.md */; };
 		389DDAEE246943F70011BB1C /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389DDAED246943F70011BB1C /* CategoryItem.swift */; };
 		389DDAF0246944030011BB1C /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389DDAEF246944030011BB1C /* ToDoItem.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38554F7D2469B75300E1565D /* SwipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		387B142E2463498E0014683B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		389DDAED246943F70011BB1C /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		389DDAEF246944030011BB1C /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			children = (
 				38F63632246338AA00AA3280 /* ToDoListViewController.swift */,
 				389E63182468010A00E13C4D /* CategoryViewController.swift */,
+				38554F7D2469B75300E1565D /* SwipeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				38F63633246338AA00AA3280 /* ToDoListViewController.swift in Sources */,
 				389DDAF0246944030011BB1C /* ToDoItem.swift in Sources */,
 				38F6362F246338AA00AA3280 /* AppDelegate.swift in Sources */,
+				38554F7E2469B75300E1565D /* SwipeViewController.swift in Sources */,
 				38F63631246338AA00AA3280 /* SceneDelegate.swift in Sources */,
 				389DDAEE246943F70011BB1C /* CategoryItem.swift in Sources */,
 				389E63192468010B00E13C4D /* CategoryViewController.swift in Sources */,
