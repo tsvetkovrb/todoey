@@ -27,6 +27,8 @@ class ToDoListViewController: SwipeViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapOnBackground))
         gestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(gestureRecognizer)
+        
+        self.title = selectedCategory?.name
     }
     
     @objc func tapOnBackground() {
